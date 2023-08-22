@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     tree = Turtle()
     tree.width(5)
-    tree.hideturtle()
+    #tree.hideturtle()
     tree.penup()
     tree.setpos(X_ZERO, Y_ZERO)
     tree.pendown()
@@ -29,26 +29,28 @@ if __name__ == "__main__":
     tree.screen.bgcolor("black")
 
     def branch(length):
-        tree.forward(length)
-        left_pos_array = []
-        right_pos_array = []
+
+        pos_array = []
+        
         if length > MINIMUM_BRANCH_LENGTH:
 
-            left_pos_array.append(tree.position())
+            tree.forward(length)
+
+            pos_array.append(tree.position())
             tree.setheading(tree.heading() - ANGLE)
             branch(length * LENGTH_SHORTEN_BY)
-            tree.setpos(left_pos_array[-1])
+            tree.setpos(pos_array[-1])
 
-            right_pos_array.append(tree.position())
+            pos_array.append(tree.position())
             tree.setheading(tree.heading() + ANGLE)
             branch(length * LENGTH_SHORTEN_BY)
-            tree.setpos(right_pos_array[-1])
+            tree.setpos(pos_array[-2])
 
 
  
     branch(MOVEMENT)
 
-    # Test to show different parts of pos array
-    # print(f"Last turtle position {pos_array[-1]}\n"
-    #         f"Second to last turtle position {pos_array[-2]}")
+    #Test to show different parts of pos array
+    print(f"Last turtle position {pos_array[-1]}\n"
+            f"Second to last turtle position {pos_array[-2]}")
     tree.screen.mainloop()
